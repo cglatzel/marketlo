@@ -11,11 +11,13 @@ class ProductServiceUnitTest {
     @Test
     fun should_get_all_products() {
         // arrange
-        val productService = ProductService();
+        val productRepository = Mockito.mock(ProductRepository::class.java)
+        val productService = ProductService(productRepository);
         val givenProducts = listOf(
             Product("Apple", BigDecimal.valueOf(0.30)),
             Product("Banana", BigDecimal.valueOf(0.40))
         )
+        `when`(productRepository.findAll()).thenReturn(givenProducts)
 
         // act
         val actualProducts = productService.retrieveAllProducts();

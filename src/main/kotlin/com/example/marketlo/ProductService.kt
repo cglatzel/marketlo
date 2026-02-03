@@ -3,8 +3,8 @@ package com.example.marketlo
 import org.springframework.stereotype.Service
 
 @Service
-class ProductService {
+class ProductService(private val productRepository: ProductRepository) {
     fun retrieveAllProducts(): List<Product> {
-        return emptyList();
+        return productRepository.findAll();
     }
 }
