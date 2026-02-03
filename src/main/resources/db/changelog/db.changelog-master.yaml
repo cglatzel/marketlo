@@ -1,0 +1,104 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0
+      author: Christian Glatzel
+      changes:
+        - createTable:
+            tableName: discount
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: value
+                  type: numeric
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 1
+      author: Christian Glatzel
+      changes:
+        - createTable:
+            tableName: product
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: numeric
+                  constraints:
+                    nullable: false
+              - column:
+                  name: discount_id
+                  type: int
+                  constraints:
+                    nullable: true
+  - changeSet:
+      id: 2
+      author: Christian Glatzel
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: product
+            baseColumnNames: discount_id
+            referencedTableName: discount
+            referencedColumnNames: id
+            constraintName: fk_product_discount
+            onDelete: CASCADE
+  - changeSet:
+      id: 3
+      author: Christian Glatzel
+      changes:
+        - insert:
+            tableName: discount
+            columns:
+              - column:
+                  name: value
+                  value: 0.25
+  - changeSet:
+      id: 4
+      author: Christian Glatzel
+      changes:
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: Apple
+              - column:
+                  name: price
+                  value: 0.30
+              - column:
+                  name: discount_id
+                  value: 1
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: Banana
+              - column:
+                  name: price
+                  value: 0.40
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: Bicycle
+              - column:
+                  name: price
+                  value: 800.99
