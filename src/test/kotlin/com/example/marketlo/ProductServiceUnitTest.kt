@@ -13,16 +13,16 @@ class ProductServiceUnitTest {
         // arrange
         val productRepository = Mockito.mock(ProductRepository::class.java)
         val productService = ProductService(productRepository);
-        val givenProducts = listOf(
-            Product("Apple", BigDecimal.valueOf(0.30)),
-            Product("Banana", BigDecimal.valueOf(0.40))
+        val givenProductEntities = listOf(
+            ProductEntity("Apple", BigDecimal.valueOf(0.30)),
+            ProductEntity("Banana", BigDecimal.valueOf(0.40))
         )
-        `when`(productRepository.findAll()).thenReturn(givenProducts)
+        `when`(productRepository.findAll()).thenReturn(givenProductEntities)
 
         // act
         val actualProducts = productService.retrieveAllProducts();
 
         // assert
-        assertThat(actualProducts).containsAll(givenProducts)
+        assertThat(actualProducts).usingRecursiveFieldByFieldElementComparator().containsAll(givenProductEntities)
     }
 }
