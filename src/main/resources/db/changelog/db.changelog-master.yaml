@@ -2,6 +2,7 @@ databaseChangeLog:
   - changeSet:
       id: 0
       author: Christian Glatzel
+      context: main
       changes:
         - createTable:
             tableName: discount
@@ -21,6 +22,7 @@ databaseChangeLog:
   - changeSet:
       id: 1
       author: Christian Glatzel
+      context: main
       changes:
         - createTable:
             tableName: product
@@ -50,6 +52,7 @@ databaseChangeLog:
   - changeSet:
       id: 2
       author: Christian Glatzel
+      context: main
       changes:
         - addForeignKeyConstraint:
             baseTableName: product
@@ -71,6 +74,7 @@ databaseChangeLog:
   - changeSet:
       id: 4
       author: Christian Glatzel
+      context: qa
       changes:
         - insert:
             tableName: product
