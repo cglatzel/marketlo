@@ -29,4 +29,21 @@ class ProductServiceUnitTest {
         )
         assertThat(actualProducts).usingRecursiveFieldByFieldElementComparator().isEqualTo(expectedProducts)
     }
+
+    @Test
+    fun should_checkout_and_apply_discount() {
+        // arrange
+        val productRepository = Mockito.mock(ProductRepository::class.java)
+        val productService = ProductService(productRepository)
+        val givenProducts = listOf(
+            Product("Apple", BigDecimal.valueOf(0.30), Discount(BigDecimal.valueOf(0.75)), 2),
+            Product("Banana", BigDecimal.valueOf(0.40), null, 1),
+        )
+
+        // act
+        val actual = productService.checkoutShoppingCart(givenProducts)
+
+        // assert
+        assertThat(actual.totalPrice).isEqualTo(BigDecimal.valueOf(0.85))
+    }
 }

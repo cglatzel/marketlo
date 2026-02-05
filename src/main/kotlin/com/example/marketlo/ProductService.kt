@@ -9,4 +9,8 @@ class ProductService(private val productRepository: ProductRepository) {
             .map { entity -> Product(entity.name, entity.price, entity.discountEntity?.let { Discount(it.rate) }) }
             .toList()
     }
+
+    fun checkoutShoppingCart(products: List<Product>): CheckoutResult {
+        return CheckoutResult(null, emptyList())
+    }
 }
