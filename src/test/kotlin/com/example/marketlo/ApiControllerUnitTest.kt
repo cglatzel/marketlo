@@ -12,7 +12,7 @@ class ApiControllerUnitTest {
     fun should_get_all_products() {
         // arrange
         val productServiceMock = Mockito.mock(ProductService::class.java)
-        val apiController = ApiController(productServiceMock);
+        val apiController = ApiController(productServiceMock)
         val givenProductEntities = listOf(
             Product("Apple", BigDecimal.valueOf(0.30), null),
             Product("Banana", BigDecimal.valueOf(0.40), null)

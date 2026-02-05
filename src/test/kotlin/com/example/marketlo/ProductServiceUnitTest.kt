@@ -12,7 +12,7 @@ class ProductServiceUnitTest {
     fun should_get_all_products() {
         // arrange
         val productRepository = Mockito.mock(ProductRepository::class.java)
-        val productService = ProductService(productRepository);
+        val productService = ProductService(productRepository)
         val givenProductEntities = listOf(
             ProductEntity("Apple", BigDecimal.valueOf(0.30), DiscountEntity(BigDecimal.valueOf(0.75))),
             ProductEntity("Banana", BigDecimal.valueOf(0.40), null)
@@ -20,7 +20,7 @@ class ProductServiceUnitTest {
         `when`(productRepository.findAll()).thenReturn(givenProductEntities)
 
         // act
-        val actualProducts = productService.retrieveAllProducts();
+        val actualProducts = productService.retrieveAllProducts()
 
         // assert
         val expectedProducts = listOf(

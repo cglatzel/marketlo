@@ -8,7 +8,7 @@ class PageController {
 
     @GetMapping("/")
     fun getProducts(): String {
-        return "index";
+        return "index"
     }
 
 }

@@ -12,7 +12,7 @@ class ApiController(
 
     @GetMapping("/products")
     fun getProducts(): List<Product> {
-        return productService.retrieveAllProducts();
+        return productService.retrieveAllProducts()
     }
 
 }

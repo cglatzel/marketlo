@@ -19,8 +19,8 @@ class MarketloIntegrationTest(@Autowired private val restTestClient: RestTestCli
 
     @BeforeEach
     fun beforeEach() {
-        val product = ProductEntity("Apple", BigDecimal.valueOf(0.30), null);
-        productRepository?.save(product);
+        val product = ProductEntity("Apple", BigDecimal.valueOf(0.30), null)
+        productRepository?.save(product)
     }
 
     @Test
@@ -31,7 +31,7 @@ class MarketloIntegrationTest(@Autowired private val restTestClient: RestTestCli
         val bodyType = object : ParameterizedTypeReference<List<Product>>() {}
         val returnResult = restTestClient.get().uri("/api/products").exchange().expectStatus().isOk()
             .expectBody(bodyType)
-            .returnResult();
+            .returnResult()
 
         // assert
         assertThat(returnResult.responseBody).hasSize(1)
