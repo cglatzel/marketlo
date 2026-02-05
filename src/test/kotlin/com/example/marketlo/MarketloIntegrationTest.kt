@@ -1,11 +1,12 @@
 package com.example.marketlo
 
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.core.ParameterizedTypeReference
 import org.springframework.test.web.servlet.client.RestTestClient
 import java.math.BigDecimal
 
@@ -27,10 +28,13 @@ class MarketloIntegrationTest(@Autowired private val restTestClient: RestTestCli
         // arrange
 
         // act
-        val returnResult = restTestClient.get().uri("/api/products").exchange().expectStatus().isOk().returnResult();
+        val bodyType = object : ParameterizedTypeReference<List<Product>>() {}
+        val returnResult = restTestClient.get().uri("/api/products").exchange().expectStatus().isOk()
+            .expectBody(bodyType)
+            .returnResult();
 
         // assert
-        Assertions.assertThat(returnResult).isExactlyInstanceOf(String.Companion::class.java)
+        assertThat(returnResult.responseBody).hasSize(1)
     }
 
 }
