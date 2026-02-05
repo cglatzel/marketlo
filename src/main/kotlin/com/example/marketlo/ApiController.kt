@@ -7,7 +7,7 @@ class ApiController(
     private val productService: ProductService
 ) {
 
-    fun getProducts(): List<ProductEntity> {
+    fun getProducts(): List<Product> {
         return productService.retrieveAllProducts();
     }
 

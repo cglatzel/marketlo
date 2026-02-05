@@ -23,6 +23,10 @@ class ProductServiceUnitTest {
         val actualProducts = productService.retrieveAllProducts();
 
         // assert
-        assertThat(actualProducts).usingRecursiveFieldByFieldElementComparator().containsAll(givenProductEntities)
+        val expectedProducts = listOf(
+            Product("Apple", BigDecimal.valueOf(0.30), Discount(BigDecimal.valueOf(0.75))),
+            Product("Banana", BigDecimal.valueOf(0.30), null),
+        )
+        assertThat(actualProducts).usingRecursiveFieldByFieldElementComparator().isEqualTo(expectedProducts)
     }
 }

@@ -4,7 +4,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class ProductService(private val productRepository: ProductRepository) {
-    fun retrieveAllProducts(): List<ProductEntity> {
-        return productRepository.findAll();
+    fun retrieveAllProducts(): List<Product> {
+        // return productRepository.findAll();
+        return listOf();
     }
 }
