@@ -10,9 +10,9 @@ class DiscountEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
 
-    var value: BigDecimal? = null
+    var rate: BigDecimal? = null
 
-    constructor(value: BigDecimal) {
-        this.value = value
+    constructor(rate: BigDecimal) {
+        this.rate = rate
     }
 }
