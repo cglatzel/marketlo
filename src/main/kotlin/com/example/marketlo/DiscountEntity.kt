@@ -11,4 +11,8 @@ class DiscountEntity {
     var id: Long? = null
 
     var value: BigDecimal? = null
+
+    constructor(value: BigDecimal) {
+        this.value = value
+    }
 }

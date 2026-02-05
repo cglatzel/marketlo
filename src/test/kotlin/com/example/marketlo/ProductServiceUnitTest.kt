@@ -14,8 +14,8 @@ class ProductServiceUnitTest {
         val productRepository = Mockito.mock(ProductRepository::class.java)
         val productService = ProductService(productRepository);
         val givenProductEntities = listOf(
-            ProductEntity("Apple", BigDecimal.valueOf(0.30)),
-            ProductEntity("Banana", BigDecimal.valueOf(0.40))
+            ProductEntity("Apple", BigDecimal.valueOf(0.30), DiscountEntity(BigDecimal.valueOf(0.30))),
+            ProductEntity("Banana", BigDecimal.valueOf(0.40), null)
         )
         `when`(productRepository.findAll()).thenReturn(givenProductEntities)
 

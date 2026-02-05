@@ -1,18 +1,11 @@
 package com.example.marketlo
 
-import jakarta.persistence.Entity
-import jakarta.persistence.FetchType
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.ManyToOne
-import jakarta.persistence.Table
+import jakarta.persistence.*
 import java.math.BigDecimal
 
 @Entity
 @Table(name = "product")
-class ProductEntity(string: String, price: BigDecimal) {
+class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
@@ -24,5 +17,11 @@ class ProductEntity(string: String, price: BigDecimal) {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "discount_id")
     var discountEntity: DiscountEntity? = null
+
+    constructor(name: String, price: BigDecimal, discountEntity: DiscountEntity?) {
+        this.name = name
+        this.price = price
+        this.discountEntity = discountEntity
+    }
 
 }
