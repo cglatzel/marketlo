@@ -23,6 +23,6 @@ class ProductEntity(string: String, price: BigDecimal) {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "discount_id")
-    var discount: Discount? = null
+    var discountEntity: DiscountEntity? = null
 
 }
