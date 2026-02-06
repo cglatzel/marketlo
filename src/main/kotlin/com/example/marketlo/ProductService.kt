@@ -1,6 +1,7 @@
 package com.example.marketlo
 
 import org.springframework.stereotype.Service
+import java.math.BigDecimal
 
 @Service
 class ProductService(private val productRepository: ProductRepository) {
@@ -11,6 +12,11 @@ class ProductService(private val productRepository: ProductRepository) {
     }
 
     fun checkoutShoppingCart(products: List<Product>): CheckoutResult {
-        return CheckoutResult(null, emptyList())
+        val totalPrice = products.map {
+            it.price?.multiply(
+                it.quantity?.toBigDecimal()?.multiply(it.discount?.rate?.add(BigDecimal.valueOf(-1)))
+            )
+        }.reduce { acc, currentPrice -> acc?.add(currentPrice) }
+        return CheckoutResult(totalPrice, emptyList())
     }
 }
