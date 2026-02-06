@@ -2,6 +2,7 @@ package com.example.marketlo
 
 import org.springframework.stereotype.Service
 import java.math.BigDecimal
+import java.math.RoundingMode
 
 @Service
 class ProductService(private val productRepository: ProductRepository) {
@@ -12,11 +13,13 @@ class ProductService(private val productRepository: ProductRepository) {
     }
 
     fun checkoutShoppingCart(products: List<Product>): CheckoutResult {
-        val totalPrice = products.map {
-            it.price?.multiply(
-                it.quantity?.toBigDecimal()?.multiply(it.discount?.rate?.add(BigDecimal.valueOf(-1)))
-            )
-        }.reduce { acc, currentPrice -> acc?.add(currentPrice) }
-        return CheckoutResult(totalPrice, emptyList())
+        val totalPrice = products.sumOf { product ->
+            val p = product.price ?: BigDecimal.ZERO
+            val q = product.quantity?.toBigDecimal() ?: BigDecimal.ONE
+            val d = product.discount?.rate ?: BigDecimal.ZERO
+
+            p * q * (BigDecimal.ONE - d)
+        }
+        return CheckoutResult(totalPrice.setScale(2, RoundingMode.HALF_UP), products)
     }
 }
